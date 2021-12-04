@@ -1,9 +1,9 @@
 import React from "react";
 
-import patentData from "../patent_references.json";
+import patentReferences from "../patent_references.json";
 
 const References = () => {
-  // const [patents, setPatents] = useState(patentData)
+  // const [patents, setPatents] = useState(patentReferences)
   return (
     <div style={{ padding: "1rem" }}>
       <p style={{ marginBottom: "0.5rem" }}>Patent Known References</p>
@@ -16,8 +16,8 @@ const References = () => {
           </tr>
         </thead>
         <tbody>
-          {patentData &&
-            patentData.map((item, index) => {
+          {patentReferences &&
+            patentReferences.map((item, index) => {
               return (
                 <tr key={index}>
                   <td>{item.type}</td>

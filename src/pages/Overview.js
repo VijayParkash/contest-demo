@@ -1,67 +1,71 @@
 import React from "react";
+import { Fragment } from "react";
+import ReactTooltip from "react-tooltip";
+
+import patentData from "../patent.json";
 
 const Overview = () => {
+  const {
+    patent: { iso_country_code: country, number, kind_code: kindCode },
+    biblographic_details: {
+      priority_date: date,
+      title,
+      abstract,
+      classfications,
+    },
+  } = patentData;
+
   return (
     <>
-      <div className="content">
-        <div>
-          <div>
-            <h2>Problem</h2>
-            <div>
-              <p>
-                <strong>
-                  Update: we have extended the deadline as the contest was over
-                  early and some users were not able to upload their research.
-                  So the final deadline is until the next Sunday.
-                </strong>
-              </p>
-              <p>
-                This contest is for a&nbsp; prior art search RE45145
-                &nbsp;and&nbsp; RE48600 , which describe a wing pulley for a
-                conveyor belt.
-              </p>
-              <p>&nbsp;</p>
-              <p>
-                The pulley is made up of two spaced cylindrical hubs with a
-                number of wings extending radially from the hubs. &nbsp;The
-                wings are generally oriented in V-shapes, and the convergence
-                point of the V shapes generally corresponds to the direction of
-                the pulley’s rotation.&nbsp;
-              </p>
-              <p>&nbsp;</p>
-              <p align="center">
-                <img
-                  alt=""
-                  hspace="5px"
-                  src="https://patexia-data.s3.amazonaws.com/users/user2/555_72e716382539d00ef2ec2db56efebac7.png"
-                  style={{ float: "left" }}
-                />
-              </p>
-              <p>&nbsp;</p>
-              <div style={{ height: "200px" }}>
-                <p>
-                  The pulley’s V-shaped wing configuration is intended to
-                  laterally deflect debris (like sand and gravel) away from the
-                  pulley and its conveyor belt as the pulley spins.
-                </p>
-                <p>&nbsp;</p>
-                <p>
-                  When viewing the pulley’s hub straight-on, each wing connected
-                  to the hub is angled forward of a radius of the hub (see angle
-                  “C” below in relation to radius “B”) in the direction of the
-                  pulley’s rotation (see arrow “D” below).&nbsp;
-                </p>
-              </div>
-              <p align="center">
-                <img
-                  alt=""
-                  hspace="5px"
-                  src="https://patexia-data.s3.amazonaws.com/users/user2/555_a582c8301a927ecf94e80f1eb33e3e91.png"
-                  style={{ float: "left" }}
-                />
-              </p>
-            </div>
+      <div className="content" style={{ alignItems: "flex-start" }}>
+        <div style={{ minWidth: "300px" }}>
+          <div className="padd16">
+            <p className="bold">Country</p>
+            <p className="mt8">{country}</p>
           </div>
+          <div className="padd16">
+            <p className="bold">Patent Number</p>
+            <p className="mt8">{number}</p>
+          </div>
+
+          <div className="padd16">
+            <p className="bold">Kind Code</p>
+            <p className="mt8">{kindCode}</p>
+          </div>
+          <div className="padd16">
+            <p className="bold">Priority Date</p>
+            <p className="mt8">{date}</p>
+          </div>
+          <div className="padd16">
+            {classfications.map((item) => {
+              return (
+                <Fragment key={item.class}>
+                  <div
+                    className="code-box"
+                    data-tip={item.description}
+                    data-for={item.class}
+                  >
+                    {item.class}
+                  </div>
+                  <ReactTooltip
+                    id={item.class}
+                    backgroundColor="#fff"
+                    textColor="#000"
+                    border={true}
+                    borderColor="#000000"
+                    effect="solid"
+                    place="right"
+                  />
+                </Fragment>
+              );
+            })}
+          </div>
+        </div>
+        <div style={{ minWidth: "350px" }}>
+          <div className="bold padd16">Title</div>
+          <div className="padd16">{title}</div>
+          <div className="bold padd16">Abstract</div>
+          <div className="padd16">{abstract}</div>
         </div>
       </div>
     </>

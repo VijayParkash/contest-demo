@@ -3,7 +3,7 @@ import React from "react";
 const Home = () => {
   return (
     <>
-      <div className="content">
+      <div className="content flex-col">
         <div>Welcome to Demo Contest</div>
         <p> Here you can participate in many contests to win prizes.</p>
         <p>to see open contests go to
